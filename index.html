@@ -1,80 +1,59 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>実験map</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- API参照はじめ -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.27/"></script>
+    <!-- API参照おわり　-->
 
+
+    <!-- API javascript src　-->
+    <script src="./api.js"></script> 
+
+
+
+
+    <!--　スタイル設定（CSS）　-->
     <style>
-      html,
-      body,
-      #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
+      html,body,#viewDiv {
+      padding: 0; 
+      margin: 0;
+      height: 100%;
+      width: 100%;
       }
     </style>
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
-    <script src="https://js.arcgis.com/4.26/"></script>
 
-
-    <script>
-      require([
-          "esri/config",
-          "esri/Map",
-          "esri/views/MapView",
-          "esri/widgets/Locate",
-
-          "esri/widgets/Track",
-          "esri/Graphic"
-
-        ], function(
-            esriConfig,
-            Map,
-            MapView,
-            Locate,
-
-            Track,
-            Graphic
-
-        ) {
-
-        esriConfig.apiKey = "AAPKc33225c582f04d6da5dacc29a286b4a4R4PXu_BBYzLkz8Vtwog9SLc-lxwTaKqlVn-LpknH4TXwnEzDbgmDrFkYBHoiu74_";
-
-        const map = new Map({
-          basemap: "arcgis-navigation"
-        });
-
-        const view = new MapView({
-          container: "viewDiv",
-          map: map,
-          center: [-40, 28],
-          zoom: 2
-        });
-
-        const track = new Track({
-          view: view,
-          graphic: new Graphic({
-            symbol: {
-              type: "simple-marker",
-              size: "12px",
-              color: "green",
-              outline: {
-                color: "#efefef",
-                width: "1.5px"
-              }
-            }
-          }),
-          useHeadingEnabled: false
-        });
-        view.ui.add(track, "top-left");
-
-      });
-    </script>
-
+    <title>Webマップ制作</title>
   </head>
+
   <body>
-    <div id="viewDiv"></div>
+    <!--weather html-->
+    <link rel="stylesheet" href="./weather.css">
+    <div id="location"><a href="https://www.jma.go.jp/bosai/forecast/" target="_blank">気象庁のデータを元に作成</a></div>
+    <div class="weatherForecast">
+      <div class="weather">
+        <div class="date">--/--(-)</div>
+        <img class="weatherImg">
+        <div class="weatherTelop">--</div>
+        <div><span class="tempMin">-℃</span>/<span class="tempMax">-℃</span></div>
+      <br>
+      </div>
+    </div>
+
+    <div id = "viewDiv"></div> <!-- 要素の定義 -->
+    <script>
+      for (let i = 0; i < 6; i++) {
+        const el = document.querySelector('.weather').cloneNode(true);
+       document.querySelector('.weatherForecast').appendChild(el);
+     }
+      </script>
+    <script src="./weather.js"></script>
+    
+
+
   </body>
-</html>
+
+</html>‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
